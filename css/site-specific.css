@@ -1,5 +1,5 @@
 body{
-    font-family: 'Roboto Condensed', helvetica, sans-serif;
+    font-family: 'Titillium Web', sans-serif;
 }
 
 div.title{
@@ -8,7 +8,7 @@ div.title{
 }
 
 h1{
-  color: #FF00FF;
+  color:#57d0d8;
     font-weight: 400;
     font-size: 2.5em;
     max-width: 800px;
@@ -47,6 +47,13 @@ img.bioImage{
     display: block;
 }
 
+
+img.bioImage_2{
+    width: 60%;
+    margin: auto;
+    display: block;
+}
+
 p.bioText{
     font-weight: 300;
     font-size: 1.05em;
@@ -79,5 +86,5 @@ li.assignmentLink > a{
 }
 
 li.assignmentLink > a:hover{
-    background-color: #FFFF00; 
+    background-color: #FF33FF; 
 }
