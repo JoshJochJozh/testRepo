@@ -6,20 +6,20 @@ var maxValue = 0;
 
 
 function preload() {
-  refugeeTable = loadTable('../data/RefugeesUNHCR.csv','csv', 'header');
+  refugeeTable = loadTable('../data/RefugeesUNHCR_2.csv','csv', 'header');
 
 }
 
 
 // ***** Setup function ***** //
 function setup() {
-  createCanvas(1600,1800);
-  textAlign(RIGHT, TOP);
+  createCanvas(1600,3200);
+  textAlign(LEFT, TOP);
   print(refugeeTable.getRowCount());
   print(refugeeTable.getColumnCount());
 
   for (var i =0; i<refugeeTable.getRowCount(); i++) {
-  maxValue = max(maxValue, refugeeTable.getNum(i,'Total'));
+  maxValue = max(maxValue, refugeeTable.getNum(i,'Refugees'));
 }
 
   print(maxValue);
@@ -28,13 +28,14 @@ function setup() {
 
 // ***** Draw function ***** //
 function draw() {
-  background(0);
+  background(255);
   noStroke();
-  fill(255);
+  fill(0);
   for (var i=0; i<refugeeTable.getRowCount(); i++) {
 
-    var rectLength = map(refugeeTable.getNum(i,'Total'), 0, maxValue, 0, maxLength);
-    rect(100,50 +20*i, rectLength, 15);
+    var rectLength = map(refugeeTable.getNum(i,'Refugees'), 0, maxValue, 0, maxLength);
+    rect(150,50 +20*i, rectLength, 15);
+    text(refugeeTable.getString(i, 'Country'), 10, 50+20*i);
   }
 
 }
