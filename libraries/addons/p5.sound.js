@@ -97,7 +97,7 @@ sndcore = function () {
       if (typeof AudioContext.prototype.createDelay !== 'function')
         AudioContext.prototype.createDelay = AudioContext.prototype.createDelayNode;
       if (typeof AudioContext.prototype.createScriptProcessor !== 'function')
-        AudioContext.prototype.createScriptProcessor = AudioContext.prototype.createScriptProcessor;
+        AudioContext.prototype.createScriptProcessor = AudioContext.prototype.createJavaScriptNode;
       if (typeof AudioContext.prototype.createPeriodicWave !== 'function')
         AudioContext.prototype.createPeriodicWave = AudioContext.prototype.createWaveTable;
       AudioContext.prototype.internal_createGain = AudioContext.prototype.createGain;
@@ -6480,9 +6480,9 @@ audioin = function () {
       } else {
         window.alert('This browser does not support AudioIn');
       }
-    } else if (typeof window.MediaDevices.enumerateDevices === 'function') {
+    } else if (typeof window.MediaStreamTrack.getSources === 'function') {
       // Chrome supports getSources to list inputs. Dev picks default
-      window.MediaDevices.enumerateDevices(this._gotSources);
+      window.MediaStreamTrack.getSources(this._gotSources);
     } else {
     }
     // add to soundArray so we can dispose on close
