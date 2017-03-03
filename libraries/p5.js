@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /*! p5.js v0.5.6 January 03, 2017 */
+=======
+/*! p5.js v0.5.7 February 08, 2017 */
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.p5 = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 
 },{}],2:[function(_dereq_,module,exports){
@@ -8839,7 +8843,14 @@ var p5 = function(sketch, node, sync) {
    * asynchronous loading of external files. If a preload function is
    * defined, setup() will wait until any load calls within have finished.
    * Nothing besides load calls should be inside preload (loadImage,
+<<<<<<< HEAD
    * loadJSON, loadFont, loadStrings, etc).
+=======
+   * loadJSON, loadFont, loadStrings, etc).<br><br>
+   * By default the text "loading..." will be displayed. To make your own
+   * loading page, include an HTML element with id "p5_loading" in your
+   * page. More information <a href="http://bit.ly/2kQ6Nio">here</a>.
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
    *
    * @method preload
    * @example
@@ -10116,7 +10127,12 @@ p5.prototype.cursor = function(type, x, y) {
       // https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
       coords = x + ' ' + y;
     }
+<<<<<<< HEAD
     if (type.substring(0, 6) !== 'http://') {
+=======
+    if ((type.substring(0, 7) === 'http://') ||
+        (type.substring(0, 8) === 'https://')) {
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
       // Image (absolute url)
       cursor = 'url(' + type + ') ' + coords + ', auto';
     } else if (/\.(cur|jpg|jpeg|gif|png|CUR|JPG|JPEG|GIF|PNG)$/.test(type)) {
@@ -11834,6 +11850,18 @@ p5.Graphics = function(w, h, renderer, pInst) {
 
 p5.Graphics.prototype = Object.create(p5.Element.prototype);
 
+<<<<<<< HEAD
+=======
+p5.Graphics.prototype.remove = function() {
+  if (this.elt.parentNode) {
+    this.elt.parentNode.removeChild(this.elt);
+  }
+  for (var elt_ev in this._events) {
+    this.elt.removeEventListener(elt_ev, this._events[elt_ev]);
+  }
+};
+
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
 module.exports = p5.Graphics;
 
 },{"./constants":36,"./core":37}],43:[function(_dereq_,module,exports){
@@ -15965,12 +15993,25 @@ p5.prototype._onkeydown = function (e) {
  */
 p5.prototype._onkeyup = function (e) {
   var keyReleased = this.keyReleased || window.keyReleased;
+<<<<<<< HEAD
   this._setProperty('isKeyPressed', false);
   this._setProperty('keyIsPressed', false);
   this._setProperty('_lastKeyCodeTyped', null);
   downKeys[e.which] = false;
   //delete this._downKeys[e.which];
   var key = String.fromCharCode(e.which);
+=======
+  downKeys[e.which] = false;
+  //delete this._downKeys[e.which];
+  var key = String.fromCharCode(e.which);
+
+  if(areDownKeys()) {
+    this._setProperty('isKeyPressed', false);
+    this._setProperty('keyIsPressed', false);
+  }
+
+  this._setProperty('_lastKeyCodeTyped', null);
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
   if (!key) {
     key = e.which;
   }
@@ -16094,6 +16135,27 @@ p5.prototype.keyIsDown = function(code) {
   return downKeys[code];
 };
 
+<<<<<<< HEAD
+=======
+/**
+ * The checkDownKeys function returns a boolean true if any keys pressed
+ * and a false if no keys are currently pressed.
+
+ * Helps avoid instances where a multiple keys are pressed simultaneously and
+ * releasing a single key will then switch the
+ * keyIsPressed property to true.
+ * @private
+**/
+function areDownKeys() {
+  for (var key in downKeys) {
+    if (downKeys[key] === true ) {
+      return true;
+    }
+  }
+  return false;
+}
+
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
 module.exports = p5;
 
 },{"../core/core":37}],52:[function(_dereq_,module,exports){
@@ -16452,7 +16514,11 @@ p5.prototype.mouseIsPressed = false;
 p5.prototype.isMousePressed = false; // both are supported
 
 p5.prototype._updateNextMouseCoords = function(e) {
+<<<<<<< HEAD
   if(this._curElement !== null) {
+=======
+  if(this._curElement !== null && (!e.touches || e.touches.length>0)) {
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
     var mousePos = getMousePos(this._curElement.elt, this.width, this.height, e);
     this._setProperty('mouseX', mousePos.x);
     this._setProperty('mouseY', mousePos.y);
@@ -17787,7 +17853,11 @@ var frames = [];
  * var pink = color(255, 102, 204);
  * img = createImage(66, 66);
  * img.loadPixels();
+<<<<<<< HEAD
  * var d = pixelDensity;
+=======
+ * var d = pixelDensity();
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
  * var halfImage = 4 * (width * d) * (height/2 * d);
  * for (var i = 0; i < halfImage; i+=4) {
  *   img.pixels[i] = red(pink);
@@ -18215,7 +18285,11 @@ function _sAssign(sVal, iVal) {
 /**
  * @method image
  * @param  {p5.Image} img
+<<<<<<< HEAD
  * @param  {Number}   dx     the -xcoordinate in the destination canvas at
+=======
+ * @param  {Number}   dx     the x-coordinate in the destination canvas at
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
  *                           which to place the top-left corner of the
  *                           source image
  * @param  {Number}   dy     the y-coordinate in the destination canvas at
@@ -18977,7 +19051,11 @@ p5.Image.prototype.copy = function () {
 
 /**
  * Masks part of an image from displaying by loading another
+<<<<<<< HEAD
  * image and using it's blue channel as an alpha channel for
+=======
+ * image and using it's alpha channel as an alpha channel for
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
  * this image.
  *
  * @method mask
@@ -21253,7 +21331,15 @@ p5.prototype.downloadFile = function (href, fName, extension) {
   a.download = filename;
 
   // Firefox requires the link to be added to the DOM before click()
+<<<<<<< HEAD
   a.onclick = destroyClickedElement;
+=======
+  a.onclick = function(e) {
+    destroyClickedElement(e);
+    e.stopPropagation();
+  };
+
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
   a.style.display = 'none';
   document.body.appendChild(a);
 
@@ -26771,7 +26857,11 @@ p5.Font.prototype.textBounds = function(str, x, y, fontSize, options) {
 
         var gm = glyph.getMetrics();
 
+<<<<<<< HEAD
         if (glyph.name !== 'space') {
+=======
+        if (glyph.name !== 'space' && glyph.unicode !== 32) {
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
 
           xCoords.push(gX + (gm.xMax * scale));
           yCoords.push(gY + (-gm.yMin * scale));
@@ -29118,6 +29208,13 @@ p5.prototype.camera = function(x, y, z){
  *
  */
 p5.prototype.perspective = function(fovy,aspect,near,far) {
+<<<<<<< HEAD
+=======
+  fovy = fovy || (60 / 180 * this.PI);
+  aspect = aspect || (this.width/this.height);
+  near = near || ((this.height/2.0) / this.tan(fovy/2.0) * 0.1);
+  far = far || ((this.height/2.0) / this.tan(fovy/2.0) * 10);
+>>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
   this._renderer.uPMatrix = p5.Matrix.identity();
   this._renderer.uPMatrix.perspective(fovy,aspect,near,far);
   this._renderer._curCamera = 'custom';
