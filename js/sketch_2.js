@@ -1,5 +1,6 @@
 // ***** Global variables ***** //
 var refugeeTable;
+
 var maxLength =1600;
 var maxValue = 0;
 
@@ -8,10 +9,15 @@ var maxValue = 0;
 function preload() {
   refugeeTable = loadTable('../data/RefugeesUNHCR_2.csv','csv', 'header');
 
+
+// ***** Preload function ***** //
+function preload(){
+  refugeeTable = loadTable('../data/RefugeesUNHCR.csv', 'csv', 'header');
+  console.log('Done loading table...');
 }
 
-
 // ***** Setup function ***** //
+
 function setup() {
   createCanvas(1600,3200);
   textAlign(LEFT, TOP);
@@ -37,5 +43,4 @@ function draw() {
     rect(150,50 +20*i, rectLength, 15);
     text(refugeeTable.getString(i, 'Country'), 10, 50+20*i);
   }
-
 }
