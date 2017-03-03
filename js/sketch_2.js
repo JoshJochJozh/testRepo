@@ -38,5 +38,6 @@ function draw() {
     var rectLength = map(refugeeTable.getNum(i,'Refugees'), 0, maxValue, 0, maxLength);
     rect(150,50 +20*i, rectLength, 15);
     text(refugeeTable.getString(i, 'Country'), 10, 50+20*i);
+    text(refugeeTable.getNum(i,'Refugees'),150+rectLength, 50 +20*i);
   }
 }
