@@ -1,25 +1,21 @@
 // ***** Global variables ***** //
 var refugeeTable;
-
 var maxLength =1600;
 var maxValue = 0;
 
 
 
-function preload() {
-  refugeeTable = loadTable('../data/RefugeesUNHCR_2.csv','csv', 'header');
-
 
 // ***** Preload function ***** //
 function preload(){
-  refugeeTable = loadTable('../data/RefugeesUNHCR.csv', 'csv', 'header');
+  refugeeTable = loadTable('../data/RefugeesUNHCR_2.csv', 'csv', 'header');
   console.log('Done loading table...');
 }
 
 // ***** Setup function ***** //
 
 function setup() {
-  createCanvas(1600,3200);
+  createCanvas(1600,4200);
   textAlign(LEFT, TOP);
   print(refugeeTable.getRowCount());
   print(refugeeTable.getColumnCount());
