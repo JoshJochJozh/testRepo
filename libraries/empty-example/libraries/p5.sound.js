@@ -97,11 +97,7 @@ sndcore = function () {
       if (typeof AudioContext.prototype.createDelay !== 'function')
         AudioContext.prototype.createDelay = AudioContext.prototype.createDelayNode;
       if (typeof AudioContext.prototype.createScriptProcessor !== 'function')
-<<<<<<< HEAD
-        AudioContext.prototype.createScriptProcessor = AudioContext.prototype.createJavaScriptNode;
-=======
         AudioContext.prototype.createScriptProcessor = AudioContext.prototype.createScriptProcessor;
->>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
       if (typeof AudioContext.prototype.createPeriodicWave !== 'function')
         AudioContext.prototype.createPeriodicWave = AudioContext.prototype.createWaveTable;
       AudioContext.prototype.internal_createGain = AudioContext.prototype.createGain;
@@ -6484,15 +6480,9 @@ audioin = function () {
       } else {
         window.alert('This browser does not support AudioIn');
       }
-<<<<<<< HEAD
-    } else if (typeof window.MediaStreamTrack.getSources === 'function') {
-      // Chrome supports getSources to list inputs. Dev picks default
-      window.MediaStreamTrack.getSources(this._gotSources);
-=======
     } else if (typeof window.MediaDevices.enumerateDevices === 'function') {
       // Chrome supports getSources to list inputs. Dev picks default
       window.MediaDevices.enumerateDevices(this._gotSources);
->>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
     } else {
     }
     // add to soundArray so we can dispose on close
@@ -9344,8 +9334,4 @@ src_app = function () {
   var p5SOUND = sndcore;
   return p5SOUND;
 }(sndcore, master, helpers, errorHandler, panner, soundfile, amplitude, fft, signal, oscillator, env, pulse, noise, audioin, filter, delay, reverb, metro, looper, soundRecorder, peakdetect, gain, distortion);
-<<<<<<< HEAD
 }));
-=======
-}));
->>>>>>> 0e9ce897b224482f4293f5e17ac7d02747132804
