@@ -19,13 +19,14 @@ function setup(){
 
 // ***** Draw function ***** //
 function draw(){
-  background(255);
-  fill(0);
+  background(0);
+  fill(255);
   noStroke();
   for (var i = 0; i < refugeeTable.getRowCount(); i++) {
     rect(100, 2 + 14*i, refugeeTable.getNum(i, 'Total'), 12);
   }
   for (var i = 0; i < refugeeTable.getRowCount(); i++) {
+    fill(155);
     text(refugeeTable.getString(i, 'Country'), 10, 14*i);
   }
 }
