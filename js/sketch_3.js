@@ -29,6 +29,8 @@ function setup(){
     print('Maximum total is ' + maxTotal);
     print('Maximum label length is ' + maxLabel);
     createNewTable();
+
+    text('REFUGEES RANKINGS', 800,20)
 }
 
 // ****** Create new table function ******** //
@@ -59,6 +61,10 @@ function drawCountries(category){
     for (var i = 0; i < topRefugeesTable.getRowCount(); i++) {
         var total = topRefugeesTable.getNum(i, category);
         var length = map(total, 0, maxTotal, 0, maxLength);
+
+        fill(183, 28, 28, length/maxLength*230+25);
+
+
         rect( 160 + 25*i , maxLabel * 5, 12, length);
         text(nfc(total, 0), 160+25*i, maxLabel * 5 + length + 15);
         text(topRefugeesTable.getString(i, 'Country'),160+25*i, maxLabel * 5 + length + 25);
