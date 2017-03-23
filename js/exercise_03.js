@@ -1,8 +1,8 @@
-var dimensionX = 40;
-var dimensionY = 20;
+var dimensionX = 80;
+var dimensionY = 40;
 
 function setup() {
-	createCanvas(800,400);
+	createCanvas(1600,800);
 
 }
 
@@ -21,7 +21,7 @@ function drawCubes(xPos, yPos) {
           var hue = i*2.5;
           var saturation = j*5;
 
-          fill(hue,saturation,100);
+          //fill(hue,saturation,100);
 
           var cubeX = i * 20 +5;
           var cubeY = j * 20 +5;
@@ -31,7 +31,9 @@ function drawCubes(xPos, yPos) {
 
           var d = int(dist(cubeX, cubeY, x2, y2));
 
-		  ellipse(cubeX, cubeY, d/20,d/20);
+          fill(d/10,saturation,100);
+
+		  ellipse(cubeX, cubeY, d/25,d/25);
 
 
 		}
