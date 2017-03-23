@@ -31,8 +31,8 @@ function drawCubes(xPos, yPos) {
 
           var d = int(dist(cubeX, cubeY, x2, y2));
 
-          fill(d/10,saturation,100);
 
+          fill(d/10,saturation,100);
 		  ellipse(cubeX, cubeY, d/25,d/25);
 
 
