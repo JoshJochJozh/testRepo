@@ -40,6 +40,7 @@ function drawCubes(xPos, yPos) {
 }
 
 
+
 function draw() {
 	drawCubes(mouseX,mouseY);
 
