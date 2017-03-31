@@ -32,7 +32,6 @@ function setup() {
 
 
 
-
 }
 
 
@@ -114,7 +113,7 @@ function draw() {
 		fill(0);
 		textAlign(CENTER);
 		textSize(12);
-		text(temperature +'C',locationX,240);
+		text(temperature +' C',locationX,240);
 
 
 		fill(0);
