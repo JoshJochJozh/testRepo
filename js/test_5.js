@@ -68,7 +68,7 @@ function drawCubes(tempCloud) {
           noStroke();
 
           var hue = i;
-          var saturation = 100-tempCloud;
+          var saturation = 100 - tempCloud;
 
 
           fill(hue,saturation,100);

@@ -3,7 +3,7 @@ var citibikeData;
 var apiKey  = 'eaf69ef47b772f01998d2ccb237bb48f';
 
 var baseURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
-var city = 'miami';
+var city = 'houston';
 var units   = 'metric';
 
 var weatherData;
