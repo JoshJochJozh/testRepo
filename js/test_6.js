@@ -14,13 +14,13 @@ var blackWhole;
 
 
 function setup () {
-  createCanvas(800,800);
+  createCanvas(1600,800);
 
   for (var i = 0; i < 50; i++) {
     nervousBall.push(new Jitter());
   }
 
-  blackWhole = createVector(400, 400);
+  blackWhole = createVector(width/2, height/2);
 }
 
 
@@ -30,7 +30,7 @@ function Jitter() {
 
   //**** Properties
 
-  this.position = createVector(random(0,width), random(0,height));
+  this.position = createVector(random(width/2-200,width/2+200), random(height/2-200,height/2+200));
 
 
   this.diameter = random(0,60);
@@ -39,7 +39,7 @@ function Jitter() {
   this.g = random(50,100);
   this.b = random(50,100);
 
-  this.speed = random(0,5);
+  this.speed = random(0,4);
 
 
   this.velocityX = random(-4,4);
@@ -88,16 +88,16 @@ function Jitter() {
 
     var distance = this.position.dist(blackWhole);
 
-    if(distance > 400) {
+    if(distance >= 400) {
       this.velocityX = -this.velocityX;
       this.velocityY = -this.velocityY;
     }
 
-    if(distance < 150) {
+    if(distance < 100) {
       this.panic = true;
     }
 
-    if(distance > 150) {
+    if(distance > 100) {
       this.panic = false;
     }
 
@@ -125,7 +125,7 @@ function draw() {
   stroke(255);
   strokeWeight(1);
   fill(255);
-  ellipse(blackWhole.x, blackWhole.y, 300, 300);
+  ellipse(blackWhole.x, blackWhole.y, 200, 200);
 
 
   for (var i = 0; i < 50; i++) {
