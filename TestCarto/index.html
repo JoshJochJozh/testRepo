@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html>
+
+    <meta charset="utf-8">
+    <meta property="og:image" content="isi_articles_cartogram.png">
+    <script src="lib/d3.v3.min.js"></script>
+    <script src="lib/colorbrewer.js"></script>
+    <script src="lib/topojson.js"></script>
+    <script src="cartogram.js"></script>
+    <style type="text/css">
+
+
+
+
+
+  <!-- Styles CSS -->
+<style>
+    body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            padding: 0;
+            margin: 0;
+        }
+
+    #content {
+        padding: 50px;
+        margin: 40px;
+        
+        text-align: center;
+    }
+
+
+    #content p {
+        font-family: Helvetica, sans-serif;
+        background-color: rgba(255, 255, 255, .48);
+        font-size: 18px;
+        line-height: 40px;
+        color: #111;
+    }
+
+
+    h1 {
+        text-transform: capitalize;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 40px;
+        padding: 0px;
+        margin: -10px;
+
+        line-height: 80px;
+
+
+        top: 10px;
+        left:40px;
+        
+        color: #111;
+
+
+
+        position: fixed;
+    }
+
+    h2 {
+        text-transform: capitalize;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 18px;
+        padding: 0px;
+        margin: -10px;
+
+        line-height: 80px;
+
+
+        top: 10px;
+        right:40px;
+        
+        color: #111;
+
+
+
+        position: fixed;
+    }
+
+
+
+
+    h3 {
+        font-family: Helvetica, sans-serif;
+        text-transform: capitalize;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 12px;
+        padding: 0px;
+        margin: -10px;
+
+        line-height: 80px;
+
+
+        bottom: 10px;
+        left:40px;
+        
+        color: #111;
+
+
+
+        position: fixed;
+    }
+
+
+    h4 {
+        font-family: Helvetica, sans-serif;
+        text-transform: capitalize;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 12px;
+        padding: 0px;
+        margin: -10px;
+
+        line-height: 80px;
+
+
+        bottom: 10px;
+        right:40px;
+        
+        color: #111;
+
+
+
+        position: fixed;
+    }
+
+
+
+
+    #bigYellowCircle {
+
+        background-position: center center;
+        position: fixed;
+
+        top: 100px;
+        left:160px;
+        width: 120vw;
+        height: 120vw;
+        z-index: -1;
+        opacity: 0.8;
+    }
+    #blueSquare {
+        background-image: url("https://www.kirupa.com/images/blue_square.svg");
+        background-repeat: no-repeat;
+        background-position: 50% bottom;
+        background-size: 10%;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vw;
+        z-index: -2;
+        opacity: .75;
+    }
+    #greenPentagon {
+        background-image: url("https://www.kirupa.com/images/green_pentagon.svg");
+        background-repeat: no-repeat;
+        background-position: 50% top;
+        background-size: 50%;
+        position: fixed;
+        top: 0;
+        width: 100vw;
+        height: 100vw;
+        z-index: -3;
+        opacity: .75;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #container {
+            width: 800px;
+            margin: 20px auto;
+        }
+
+
+        h5 {
+            padding: 50px;
+            font-size: 160%;
+            margin: 0 0 10px 0;
+            top:100;
+        }
+
+        p {
+            margin: 0 0 10px;
+        }
+
+        form, form > * {
+            margin: 0;
+        }
+
+        #map-container {
+            width: 1600px;
+            height: 1000px;
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+
+            left: 300;
+            top: 300;
+        }
+
+        #map {
+            display: block;
+            position: absolute;
+            background: #fff;
+            width: 120%;
+            height: 120%;
+            margin: 0;
+
+            left: 300;
+            top: 300;
+        }
+
+        path.country {
+            stroke: #666;
+            stroke-width: .5;
+        }
+
+        path.country:hover {
+            stroke: #000;
+        }
+
+        form {
+            font-size: 120%;
+        }
+
+        select {
+            font-size: inherit;
+        }
+
+        #placeholder {
+            position: absolute;
+            z-index: -1;
+            display: block;
+            left: 0;
+            top: 300;
+        }
+
+        #theyear {
+            line-height: 0.4em;
+            border: 1px;
+            font-size: 4em;
+
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+        }
+
+        #about {
+            width: 600px;
+            font-size: .9em;
+        }
+
+        #credits {
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+            font-size: 1em;
+        }
+
+</style>
+
+
+
+
+
+
+<body>
+
+<head>
+    <title>World scaled by the number of refugees taken by each country</title> 
+
+
+<h1><center><strong>World of a Syrian Refugee</strong></center></h1>
+
+
+
+
+
+<h3><center>COLUMBIA UNIVERSITY</center></h3>
+
+
+<h4><center> Majed Abdulsamad / Maira Khan / Jianghanhan Li / Ge Zhao</center></h4>
+
+
+
+
+
+<h5><center><strong>World of a Syrian Refugee</strong></center></h5>
+
+
+
+<p><center>Map scaled by the number of Syrian refugees and asylum seekers accepted by each country</center></p>
+
+
+<div id="content">
+    <p>All work and no play makes Jack a dull boy
+    ll work and no play makes Jack a dull boy
+    ll work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+    <p>All work and no play makes Jack a dull boy</p>
+</div>
+
+
+
+
+<script>
+
+<div id="bigYellowCircle">
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    <div id="bigYellowCircle">
+<!--<
+        <img id="placeholder" alt="placeholder image for old browsers" src="isi_articles_cartogram.png">
+>-->
+        <svg id="map"></svg>
+        <div id="theyear">
+            <span></span><br />
+            <input style="position:relative; width:110px" type="range" min="1990" max="2015" value="1990">
+
+
+        </div>
+        <div id="bigYellowCircle ">
+    Data Source: <a href="http://www.unhcr.org/en-us">UNHCR</a>,    Libraries used: <a href="http://d3js.org">d3.js</a> and <a href="https://github.com/shawnbot/d3-cartogram/">cartogram.js.</a>  
+        <!--<CC-BY J.P. Alperin</div>>-->
+    </div>
+    <form>
+        <p>
+            <!--<label>Scale by <select id="field"></select></label>-->
+            <!--<label>in <select id="year"></select></label>-->
+            <!--<span id="status"></span>-->
+<!--<
+        </p>
+    </form>
+    <div id="about">
+        <h2>About</h2>
+        <p>
+            This map was produced by Juan Pablo Alperin (<a href="https://twitter.com/intent/follow?screen_name=juancommander">@juancommander</a>) using
+            <a href="http://d3js.org">d3.js</a> and <a href="https://github.com/shawnbot/d3-cartogram/">cartogram.js</a>.
+            It was inspired by the out of date map over at <a href="http://worldmapper.org/display.php?selected=205">worldmapper.org</a>.
+            Unfortunately, not much has changed. Due to differences in the implementations, the two maps cannot be directly
+            compared to one another.
+        </p>
+        <p>
+            Juan Pablo is a PhD Candidate at Stanford University and a researcher with the <a href="http://pkp.sfu.ca">Public Knowledge Project</a>.
+        </p>
+        <p>
+            This work was carried out with the support of the IDRC-funded project,
+            <a href="http://flacso.org.br/oa/calidad-en-la-comunicacion-cientifica-abierta-de-america-latina/?lang=en">Quality in the Open Scholarly Communication of Latin America</a>.
+            The data are from Thomson Reuters and were collected by the Mimir Project conducted at Stanford University by Daniel A. McFarland, Dan Jurafsky, Chris Manning, and Woody Powell,
+            which was generously funded by the Office of the President at Stanford University and by the National Science Foundation [Award 0835614]. </p>
+        <p>
+            The code (including most of this page) was adapted from the example provided by
+            <a href="https://github.com/shawnbot/d3-cartogram/">shawnbot</a>.
+            You can see the source code over on <a href="https://github.com/jalperin/d3-cartogram">Juan's github</a>.
+        </p>
+</div>
+>-->
+
+
+<script>
+// hide the form if the browser doesn't do SVG,
+// (then just let everything else fail)
+if (!document.createElementNS) {
+    document.getElementsByTagName("form")[0].style.display = "none";
+}
+
+// field definitions from:
+// <http://www.census.gov/popest/data/national/totals/2011/files/NST-EST2011-alldata.pdf>
+var percent = (function() {
+            var fmt = d3.format(".2f");
+            return function(n) { return fmt(n) + "%"; };
+        })(),
+        years = [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015],
+        fields = [
+//            {name: "(no scale)", id: "none"},
+            {name: "Number of Articles in ISI", id: "num_articles", key: "num_articles%d", years: years}
+//            {name: "Population", id: "num_articles2001", key: "num_articles2001", format: "+,"},
+//            {name: "% FB users", id: "p_fb_users", key: "p_fb_users", format: percent},
+            // {name: "% of Articles", id: "p_int_users", key: "p_int_users", format: percent},
+//            {name: "% Internet users", id: "p_int_users", key: "p_int_users", format: percent},
+//            {name: "% FB users of Internet Users", id: "p_fb_users_of_int_users", key: "p_fb_users_of_int_users", format: percent}
+        ],
+        fieldsById = d3.nest()
+                .key(function(d) { return d.id; })
+                .rollup(function(d) { return d[0]; })
+                .map(fields),
+        field = fields[0],
+        year = years[0],
+        colors = colorbrewer.RdYlBu[3]
+                .reverse()
+                .map(function(rgb) { return d3.hsl(rgb); });
+
+var body = d3.select("body"),
+        stat = d3.select("#status");
+
+//var fieldSelect = d3.select("#field")
+//        .on("change", function(e) {
+//            field = fields[this.selectedIndex];
+//            location.hash = "#" + [field.id, year].join("/");
+//        });
+//
+//fieldSelect.selectAll("option")
+//        .data(fields)
+//        .enter()
+//        .append("option")
+//        .attr("value", function(d) { return d.id; })
+//        .text(function(d) { return d.name; });
+
+//var yearSelect = d3.select("#year")
+//        .on("change", function(e) {
+//            year = years[this.selectedIndex];
+//            location.hash = "#" + [field.id, year].join("/");
+//        });
+//
+//yearSelect.selectAll("option")
+//        .data(years)
+//        .enter()
+//        .append("option")
+//        .attr("value", function(y) { return y; })
+//        .text(function(y) { return y; })
+
+d3.select("input[type=range]").on("change", function() { year = this.value; update(); });
+d3.select("input[type=range]").on("click", function() { clearInterval(intervalId); });
+
+
+
+
+
+var intervalId = setInterval(function(){
+    if (year < d3.max(years)) {
+        year = year + 1;
+        update()
+    } else {
+        setInterval(intervalId);
+    }
+},2000);
+
+
+
+
+
+
+
+var map = d3.select("#map"),
+        zoom = d3.behavior.zoom()
+                .translate([-38, 32])
+                .scale(1.4)
+                .scaleExtent([0.5, 10.0])
+                .on("zoom", updateZoom),
+        layer = map.append("g")
+                .attr("id", "layer"),
+        countries = layer.append("g")
+                .attr("id", "countries")
+                .selectAll("path");
+
+// map.call(zoom);
+updateZoom();
+
+function updateZoom() {
+    var scale = zoom.scale();
+    layer.attr("transform",
+            "translate(" + zoom.translate() + ") " +
+                    "scale(" + [scale, scale] + ")");
+}
+
+var proj = d3.geo.equirectangular(),
+        topology,
+        geometries,
+        rawData,
+        dataById = {},
+        carto = d3.cartogram()
+                .projection(proj)
+                .properties(function(d) {
+                    if (d.id in dataById) {
+                        return dataById[d.id];
+                    } else {
+                        var tmp = d3.keys(dataById[d3.keys(dataById)[0]]);
+                        var ret = {"numcode": d.id};
+                        tmp.forEach(function(i){ret[i] = 0});
+                        return ret;
+                    }
+                })
+                .value(function(d) {
+                    return +d.properties[field];
+                });
+
+//window.onhashchange = function() {
+//    parseHash();
+//};
+
+var segmentized = location.search === "?segmentized",
+        url = ["data",
+            segmentized ? "world-segmentized.topojson" : "world-110m.json"
+        ].join("/");
+d3.json(url, function(topo) {
+    topology = topo;
+    geometries = topology.objects.countries.geometries;
+    d3.csv("data/refugee_data.csv", function(data) {
+        rawData = data;
+        dataById = d3.nest()
+                .key(function(d) { return d.numcode; })
+                .rollup(function(d) { return d[0]; })
+                .map(data);
+        init();
+    });
+});
+
+function init() {
+    var features = carto.features(topology, geometries),
+            path = d3.geo.path()
+                    .projection(proj);
+
+    countries = countries.data(features)
+            .enter()
+            .append("path")
+            .attr("class", "country")
+            .attr("id", function(d) {
+                return d.id;
+            })
+            .attr("name", function(d) {
+                return d.properties.country;
+            })
+            .attr("fill", "#fafafa")
+            .attr("d", path);
+
+    countries.append("title");
+
+//    parseHash();
+}
+
+function reset() {
+    stat.text("");
+//    body.classed("updating", false);
+
+    var features = carto.features(topology, geometries),
+            path = d3.geo.path()
+                    .projection(proj);
+
+    countries.data(features)
+            .transition()
+            .duration(750)
+            .ease("linear")
+            .attr("fill", "#fafafa")
+            .attr("d", path);
+
+    countries.select("title")
+            .text(function(d) {
+                return d.id;
+            });
+}
+
+function update() {
+    var start = Date.now();
+//    body.classed("updating", true);
+
+    var key = field.key.replace("%d", year),
+            fmt = (typeof field.format === "function")
+                    ? field.format
+                    : d3.format(field.format || ","),
+            value = function(d) {
+                return +d.properties[key];
+            },
+            values = countries.data()
+                    .map(value)
+                    .filter(function(n) {
+                        return !isNaN(n);
+                    })
+                    .sort(d3.ascending),
+            lo = values[0],
+            hi = values[values.length - 1];
+
+    var color = d3.scale.linear()
+            .range(colors)
+            .domain(lo < 0
+                    ? [lo, 0, hi]
+                    : [lo, d3.mean(values), hi]);
+
+    // normalize the scale to positive numbers
+    var scale = d3.scale.linear()
+            .domain([lo, hi])
+            .range([1, 3000]);
+
+    // tell the cartogram to use the scaled values
+    carto.value(function(d) {
+        return scale(value(d));
+    });
+
+    // generate the new features, pre-projected
+    var features = carto(topology, geometries).features;
+
+    // update the data
+    countries.data(features)
+            .select("title")
+            .text(function(d) {
+                return [d.properties.country, fmt(value(d))].join(": ");
+            });
+
+    countries.transition()
+            .duration(750)
+            .ease("linear")
+            .attr("fill", function(d) {
+                return color(value(d));
+            })
+            .attr("d", carto.path);
+
+//    var delta = (Date.now() - start) / 1000;
+//    stat.text(["calculated in", delta.toFixed(1), "seconds"].join(" "));
+//    body.classed("updating", false);
+
+    d3.select("input[type=range]")[0][0].value=year;
+    d3.select("#theyear > span")[0][0].innerHTML=year;
+}
+
+var deferredUpdate = (function() {
+    var timeout;
+    return function() {
+        var args = arguments;
+        clearTimeout(timeout);
+        stat.text("calculating...");
+        return timeout = setTimeout(function() {
+            update.apply(null, arguments);
+        }, 10);
+    };
+})();
+
+//var hashish = d3.selectAll("a.hashish")
+//        .datum(function() {
+//            return this.href;
+//        });
+//
+//function parseHash() {
+//    var parts = location.hash.substr(1).split("/"),
+//            desiredFieldId = parts[0],
+//            desiredYear = +parts[1];
+//
+//    field = fieldsById[desiredFieldId] || fields[0];
+//    year = (years.indexOf(desiredYear) > -1) ? desiredYear : years[0];
+//
+//    fieldSelect.property("selectedIndex", fields.indexOf(field));
+//
+//    if (field.id === "none") {
+//
+//        yearSelect.attr("disabled", "disabled");
+//        reset();
+//
+//    } else {
+//
+//        if (field.years) {
+//            if (field.years.indexOf(year) === -1) {
+//                year = field.years[0];
+//            }
+//            yearSelect.selectAll("option")
+//                    .attr("disabled", function(y) {
+//                        return (field.years.indexOf(y) === -1) ? "disabled" : null;
+//                    });
+//        } else {
+//            yearSelect.selectAll("option")
+//                    .attr("disabled", null);
+//        }
+//
+//        yearSelect
+//                .property("selectedIndex", years.indexOf(year))
+//                .attr("disabled", null);
+//
+//        deferredUpdate();
+//        location.replace("#" + [field.id, year].join("/"));
+//
+//        hashish.attr("href", function(href) {
+//            return href + location.hash;
+//        });
+//    }
+//}
+
+
+</script>
+
+    <!-- Javascript Closed-->
+
+
+
+<div id="blueSquare"></div>
+<div id="greenPentagon"></div>
+
+
+
+
+
+
+
+
+
+
+    <!-- Javascript -->
+<script>
+    var bigYellowCircle = document.querySelector("#bigYellowCircle");
+    var blueSquare = document.querySelector("#blueSquare");
+    var greenPentagon = document.querySelector("#greenPentagon");
+ 
+    function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + ", " + yPos + "px, 0)";
+    }
+ 
+    window.addEventListener("DOMContentLoaded", scrollLoop, false);
+ 
+    var xScrollPosition;
+    var yScrollPosition;
+ 
+    function scrollLoop() {
+        xScrollPosition = window.scrollX;
+        yScrollPosition = window.scrollY;
+ 
+        setTranslate(0, yScrollPosition * 0, bigYellowCircle);
+        setTranslate(0, yScrollPosition * -1.5, blueSquare);
+        setTranslate(0, yScrollPosition * .5, greenPentagon);
+ 
+        requestAnimationFrame(scrollLoop);
+    }
+ 
+
+
+
+
+</script>
+
+<link rel="stylesheet" type="text/css" href="https://static01.nyt.com/newsgraphics/2014/03/05/state-of-the-economy/2a4c14557ea64150b3274fb8a9982cbc36e0e597/build.css">
+
+
+<div class="graphic-section the-section-all" data-cat="all">
+      <div class="graphic-sectionwhite ">
+        <h2>A Mixed Recovery</h2>
+        <p>
+          Industries in the health care and energy sectors grew substantially over the last five years, while jobs in real estate and construction continued to shrink. Industries that paid in the middle of the wage spectrum generally lost jobs. And while the economy overall is back to its pre-recession level, it hasn't added the roughly 10 million jobs needed to keep up with growth in the working-age population.
+
+          
+            <span class="next-link" data-section="wages">Next <span class="raquo">&raquo;</span></span>
+          
+        </p>
+        <div class="static-spot show-table all"></div>
+      </div>
+    </div>
+  
+
+
+</body>
+</html>
