@@ -15,7 +15,7 @@ html, body {
 }
 
 
-h4, h5, h6,p {
+h4,h5, h6,p {
 	margin-bottom: 20px;
 }
 
@@ -35,12 +35,16 @@ h1 {
 h2 {
 	color: rgb(255,255,255);
 	font-weight: 300;
-    font-size: 1.5em;
+    font-size: 0.8em;
     max-width: 100%;
     text-align: center;
     margin-top: 0px;
     vertical-align: middle;
     display: table-cell;
+
+
+
+}
 
 
 
@@ -66,6 +70,20 @@ h3 {
 
 
 }
+
+p {
+	color: rgb(255,255,255);
+	font-weight: 400;
+    font-size: 2em;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 0px;
+
+    display: table-cell;
+
+
+}
+
 
 
 
@@ -125,6 +143,7 @@ h3 {
 	height: 100%;
 	width:100%;
 	background-color: rgb(255,255,255);
+
 }
 
 .sectSix {
@@ -180,6 +199,7 @@ h3 {
 
 
 
+
       
 
         }
@@ -193,6 +213,7 @@ h3 {
             margin: 0;
             
             vertical-align: middle;
+
 
 
 
@@ -231,7 +252,7 @@ h3 {
 
             position: absolute;
             margin-top: 50px;
-            margin-left: 1500px;
+            margin-left: 1400px;
 
         }
 
