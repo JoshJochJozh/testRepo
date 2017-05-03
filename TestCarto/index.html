@@ -755,12 +755,9 @@ li.assignmentLink > a:hover{
 
 
 <script>
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+</script>
 
-
-<script>
-
-<div id="bigYellowCircle">
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <div id="bigYellowCircle">
 <!--<
@@ -777,9 +774,9 @@ li.assignmentLink > a:hover{
     Data Source: <a href="http://www.unhcr.org/en-us">UNHCR</a>,    Libraries used: <a href="http://d3js.org">d3.js</a> and <a href="https://github.com/shawnbot/d3-cartogram/">cartogram.js.</a>  
         <!--<CC-BY J.P. Alperin</div>>-->
     </div>
-    <form>
+    <!--<form>
         <p>
-            <!--<label>Scale by <select id="field"></select></label>-->
+            <!<label>Scale by <select id="field"></select></label>-->
             <!--<label>in <select id="year"></select></label>-->
             <!--<span id="status"></span>-->
 <!--<
@@ -809,9 +806,10 @@ li.assignmentLink > a:hover{
         </p>
 </div>
 >-->
+<!--<script language="javascript" type="text/javascript" src="../js/final_test_02.js"></script>-->
 
-
-<script>
+<script type="text/javascript">
+    
 // hide the form if the browser doesn't do SVG,
 // (then just let everything else fail)
 if (!document.createElementNS) {
@@ -1143,15 +1141,8 @@ var deferredUpdate = (function() {
 //    }
 //}
 
-
 </script>
 
-    <!-- Javascript Closed-->
-
-
-
-<div id="blueSquare"></div>
-<div id="greenPentagon"></div>
 
 
 
@@ -1162,37 +1153,8 @@ var deferredUpdate = (function() {
 
 
 
-    <!-- Javascript -->
-<script>
-    var bigYellowCircle = document.querySelector("#bigYellowCircle");
-    var blueSquare = document.querySelector("#blueSquare");
-    var greenPentagon = document.querySelector("#greenPentagon");
- 
-    function setTranslate(xPos, yPos, el) {
-        el.style.transform = "translate3d(" + xPos + ", " + yPos + "px, 0)";
-    }
- 
-    window.addEventListener("DOMContentLoaded", scrollLoop, false);
- 
-    var xScrollPosition;
-    var yScrollPosition;
- 
-    function scrollLoop() {
-        xScrollPosition = window.scrollX;
-        yScrollPosition = window.scrollY;
- 
-        setTranslate(0, yScrollPosition * 0, bigYellowCircle);
-        setTranslate(0, yScrollPosition * -1.5, blueSquare);
-        setTranslate(0, yScrollPosition * .5, greenPentagon);
- 
-        requestAnimationFrame(scrollLoop);
-    }
- 
 
 
-
-
-</script>
 
 <link rel="stylesheet" type="text/css" href="https://static01.nyt.com/newsgraphics/2014/03/05/state-of-the-economy/2a4c14557ea64150b3274fb8a9982cbc36e0e597/build.css">
 
