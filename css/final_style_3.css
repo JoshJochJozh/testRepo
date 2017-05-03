@@ -47,31 +47,58 @@ h2 {
 }
 
 
-
-}
-
 h3 {
-	color: rgb(0,0,0);
-	font-weight: 200;
-    font-size: 1em;
-    max-width: 60%;
-    text-align: left;
-
+    color: rgb(0,0,0);
+    font-weight: 500;
+    font-size: 1.5em;
+    max-width: 100%;
+    text-align: justify;
+    margin-top: 0px;
     vertical-align: middle;
-
     display: table-cell;
 
-    padding: 200px;
-    margin-top: 20px;
-    margin-right: auto;
-    margin-left: auto;
+    padding: 100px;
 
 
 
 
-}
+ }
 
-p {
+h4 {
+    color: rgb(255,255,255);
+    font-weight: 400;
+    font-size: 1.5em;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 0px;
+    vertical-align: middle;
+    display: table-cell;
+
+    padding: 100px;
+
+
+
+
+ } 
+
+ h5 {
+    color: rgb(255,255,255);
+    font-weight: 300;
+    font-size: 1em;
+    max-width: 100%;
+    text-align: left;
+    margin-top: 0px;
+    vertical-align: bottom;
+    display: table-cell;
+
+    padding: 50px;
+
+
+
+
+ }
+
+ p {
 	color: rgb(255,255,255);
 	font-weight: 400;
     font-size: 2em;
@@ -82,7 +109,7 @@ p {
     display: table-cell;
 
 
-}
+ }
 
 
 
@@ -182,7 +209,8 @@ p {
 
 
 
-        #container {
+
+     #container {
             width: 600px;
             margin: 20px auto;
             text-align: center;
@@ -218,6 +246,7 @@ p {
             margin: 0;
             
             vertical-align: middle;
+            background-attachment: fixed;
 
 
 
@@ -258,6 +287,7 @@ p {
             position: absolute;
             margin-top: 50px;
             margin-left: 1400px;
+            background-attachment: fixed;
 
         }
 
