@@ -17,6 +17,15 @@
     <script src="lib/topojson.js"></script>
     <script src="cartogram.js"></script>
 
+    <video class="sect sectOne" playsinline autoplay muted loop>
+  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+
+  <source src="../img/refugee_moving_2.mp4" type="video/mp4">
+  </video>
+
+
+
+
 
 
 
@@ -29,8 +38,8 @@
 <div class="sect sectOne">
 	<h1>WORLD OF A SYRIAN REFUGEE</h1>
 	<h2>
-	<br>
-	<br>
+
+
 
 	COLUMBIA UNIVERSITY
 	
@@ -43,10 +52,7 @@
 
 
 <div class="sect sectTwo">
-  <h4> "يلي ايدو بالمي مو متل يلي ايدو بالنار"
-  <br>
-  <i> "He whose hand is in fire, doesn't compare to that whose hand is in water" </i> 
-  </h4>
+
 </div>
 
 <div class="subSection">
@@ -150,7 +156,7 @@ if (!document.createElementNS) {
 
 
 var percent = (function(yPos) {
-            var fmt = d3.format(".2f");
+            var fmt = d3.format(".2f");876
             return function(n) { return fmt(n) + "%"; };
         })(),
         years = [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015],
@@ -226,7 +232,7 @@ d3.select("input[type=range]").on("click", function() { clearInterval(intervalId
 var intervalId = setInterval(function(){
     if (year < d3.max(years)) {
 
-        year = year + 1;
+        
         update()
     } else {
         setInterval(intervalId);
@@ -491,9 +497,11 @@ var deferredUpdate = (function() {
 	<h3>Using data on admission of refugees and asylum seekers numbers per country, we redraw the map of the world from a Syrian refugee perspective. Which countries are bigger, more likely to accept a Syrian refugee. All while comparing to the media coverage generated around the topic of refugees. While this is difficult to accurately plot, the topic of Syrian refugees vary in frequency from one country’s media to another and the argument can be made for a mutually exclusive relation between the two.    </h3>
 </div>
 
-
+<div class="sectLong sectEight"></div>
 
 <div class="sect sectSix"></div>	
+
+
 
 <div class="sectOne">
 <h5>Majed Abdulsamad / Maira Khan / Jianghanhan Li / Ge Zhao
